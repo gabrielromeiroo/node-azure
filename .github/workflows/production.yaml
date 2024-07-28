@@ -7,7 +7,7 @@ on:
 
 
 env:
-    RELEASE_PATH: '/home/www/actions'
+    RELEASE_PATH: '/home/gabx/www/actions'
 
 jobs:
     deploy:
