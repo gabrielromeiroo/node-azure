@@ -35,7 +35,6 @@ jobs:
                 key: ${{ secrets.KEY }}
                 script: |
                     cd ${{ env.RELEASE_PATH }}/build
-                    nvm use default
                     npm install
 
             - name: Start PM2
@@ -46,8 +45,7 @@ jobs:
                 key: ${{ secrets.KEY }}
                 script: |
                     cd ${{ env.RELEASE_PATH }}/build
-                    nvm use default
-                    pm2 delete -s "application" || :
+                    pm2 delete -s "application"
                     pm2 start "npm run dev" --name "application"
 
             
