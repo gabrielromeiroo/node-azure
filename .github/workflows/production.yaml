@@ -24,6 +24,5 @@ jobs:
                 host: ${{ secrets.HOST }}
                 username: ${{ secrets.USERNAME }}
                 key: ${{ secrets.KEY }}
-                rm: true
                 source: '.,!./uploads'
                 target: ${{ env.RELEASE_PATH }}/build
