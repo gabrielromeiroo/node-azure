@@ -24,5 +24,28 @@ jobs:
                 host: ${{ secrets.HOST }}
                 username: ${{ secrets.USERNAME }}
                 key: ${{ secrets.KEY }}
-                source: '.,!./uploads'
+                source: '.'
                 target: ${{ env.RELEASE_PATH }}/build
+
+            - name: Install Dependencies
+              uses: appleboy/ssh-action@master
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                key: ${{ secrets.KEY }}
+                script: |
+                    cd ${{ env.RELEASE_PATH }}/build
+                    npm install
+
+            - name: Start PM2
+              uses: appleboy/ssh-action@master
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                key: ${{ secrets.KEY }}
+                script: |
+                    cd ${{ env.RELEASE_PATH }}/build
+                    pm2 delete -s "application" || :
+                    pm2 start "npm run dev" --name "application"
+
+            
