@@ -47,5 +47,6 @@ jobs:
                     cd ${{ env.RELEASE_PATH }}/build
                     pm2 delete -s "application"
                     pm2 start "npm run dev" --name "application"
+                    pm2 restart "application"
 
             
