@@ -1,0 +1,28 @@
+name: 'Deploy Production to Server'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            # Cópia o código do github para a máquina do Workflow
+            - name: Checkout Code
+              uses: actions/checkout@v2
+             
+            - name: Transfer Files to Server
+              uses: appleboy/ssh-action@master
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                key: ${{ secrets.KEY }}
+                port: ${{ secrets.PORT }}
+                script: |
+                  ls -t
+
+            - name: Teste
+              run: ls -t
